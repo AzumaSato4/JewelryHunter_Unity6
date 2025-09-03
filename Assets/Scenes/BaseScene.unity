@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 1935359321}
   - component: {fileID: 1935359320}
   - component: {fileID: 1935359322}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -728,6 +728,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  jumpPower: 5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
