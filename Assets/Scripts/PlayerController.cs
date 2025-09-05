@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
 
     Rigidbody2D rbody; //PlayerについているRigidbody2Dを扱うための変数
-    Animator animator; //Animatorコンポーネントを
+    Animator animator; //Animatorコンポーネントを扱うための変数
 
     float axisH; //入力の方向を記憶するための変数
     bool goJump = false; //ジャンプフラグ（true：真on、false：偽off）
@@ -31,6 +31,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //ゲームのステータスがplayingでないなら
+        if (GameManager.gameState != "playing")
+        {
+            return; //その1フレームを強制終了
+        }
+
         //Velocityの元となる値の取得（右なら1.0f、左なら-1.0f、なにもなければ0）
         axisH = Input.GetAxisRaw("Horizontal");
 
@@ -56,6 +63,12 @@ public class PlayerController : MonoBehaviour
     //1秒間に50回繰り返すように制御しながら行う繰り返しメソッド
     void FixedUpdate()
     {
+        //ゲームのステータスがplayingでないなら
+        if (GameManager.gameState != "playing")
+        {
+            return; //その1フレームを強制終了
+        }
+
         //地面判定をサークルキャストで行って、その結果を変数onGroundに代入
         onGround = Physics2D.CircleCast(
             transform.position, //発射位置＝プレイヤーの位置
@@ -108,7 +121,21 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.gameState = "gameclear";
             Debug.Log("ゴールに接触した！");
+            Goal();
         }
+    }
+
+    public void Goal()
+    {
+        animator.SetBool("Clear", true);
+        GameStop(); //プレイヤーのVelocityを止めるメソッド
+    }
+
+    void GameStop()
+    {
+        //速度を0にリセット
+        //rbody.linearVelocity = new Vector2(0, 0);
+        rbody.linearVelocity = Vector2.zero;
     }
 
 }
