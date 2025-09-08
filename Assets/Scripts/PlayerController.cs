@@ -123,12 +123,35 @@ public class PlayerController : MonoBehaviour
             Debug.Log("ゴールに接触した！");
             Goal();
         }
+
+        if (collision.gameObject.CompareTag("Dead"))
+        {
+            GameManager.gameState = "gameover";
+            Debug.Log("ゲームオーバー！");
+            GameOver();
+        }
     }
 
     public void Goal()
     {
         animator.SetBool("Clear", true);
         GameStop(); //プレイヤーのVelocityを止めるメソッド
+    }
+
+    //ゲームオーバー時のメソッド
+    public void GameOver()
+    {
+        animator.SetBool("Dead", true);
+        GameStop();
+
+        //当たり判定を無効
+        GetComponent<CapsuleCollider2D>().enabled = false;
+
+        //少し上に飛び跳ねさせる
+        rbody.AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
+
+        //プレイヤーを3秒後に抹消
+        Destroy(gameObject, 3.0f);
     }
 
     void GameStop()
