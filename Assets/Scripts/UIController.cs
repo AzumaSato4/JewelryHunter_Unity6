@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
@@ -12,11 +13,18 @@ public class UIController : MonoBehaviour
     public Sprite gameClearSprite; //ゲームクリアの絵
     public Sprite gameOverSprite; //ゲームオーバーの絵
 
+    TimeController timeCnt; //TimeController.csの参照
+    public GameObject timeText; //TimeBarを取得
+
+
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        timeCnt = GetComponent<TimeController>();
+
         buttonPanel.SetActive(false); //存在を非表示
 
         //時間差でメソッドを発動
@@ -45,6 +53,12 @@ public class UIController : MonoBehaviour
             mainImage.GetComponent<Image>().sprite = gameOverSprite;
             //ネクストボタンオブジェクトのButtonコンポーネントが所持している変数interactalbeを無効（ボタン機能を無効）
             nextButton.GetComponent<Button>().interactable = false;
+        }
+        else if (GameManager.gameState == "playing")
+        {
+            //いったんdisplayTimeの数字を変数timesに渡す
+            float times = timeCnt.displayTime;
+            timeText.GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(times).ToString();
         }
     }
 

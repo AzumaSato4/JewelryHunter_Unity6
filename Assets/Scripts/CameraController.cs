@@ -30,43 +30,47 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player != null)
+        if (GameManager.gameState == "playing")
         {
-
-            //いったんプレイヤーのX座標、Y座標に位置を変数に取得
-            y = player.transform.position.y;
-            x = player.transform.position.x;
-
-            //もしも横の強制スクロールフラグが立っていたら
-            if (isScrollX)
+            if (player != null)
             {
-                //前の座標に変数分だけ加算した座標
-                x = transform.position.x + (scrollSpeedX * Time.deltaTime);
-            }
 
-            //もしも左右の限界までプレイヤーが移動したら
-            if (x < leftLimit)
-            {
-                x = leftLimit;
-            }
-            else if (x > rightLimit)
-            {
-                x = rightLimit;
-            }
+                //いったんプレイヤーのX座標、Y座標に位置を変数に取得
+                y = player.transform.position.y;
+                x = player.transform.position.x;
+
+                //もしも横の強制スクロールフラグが立っていたら
+                if (isScrollX)
+                {
+                    //前の座標に変数分だけ加算した座標
+                    x = transform.position.x + (scrollSpeedX * Time.deltaTime);
+                }
+
+                //もしも左右の限界までプレイヤーが移動したら
+                if (x < leftLimit)
+                {
+                    x = leftLimit;
+                }
+                else if (x > rightLimit)
+                {
+                    x = rightLimit;
+                }
 
 
-            if (isScrollY)
-            {
-                y = transform.position.y + (scrollSpeedY * Time.deltaTime);
-            }
+                if (isScrollY)
+                {
+                    y = transform.position.y + (scrollSpeedY * Time.deltaTime);
+                }
 
-            if (y < bottomLimit)
-            {
-                y = bottomLimit;
-            }
-            else if (y > topLimit)
-            {
-                y = topLimit;
+                if (y < bottomLimit)
+                {
+                    y = bottomLimit;
+                }
+                else if (y > topLimit)
+                {
+                    y = topLimit;
+                }
+
             }
 
 

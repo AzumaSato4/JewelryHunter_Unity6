@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -129,6 +130,12 @@ public class PlayerController : MonoBehaviour
             GameManager.gameState = "gameover";
             Debug.Log("ゲームオーバー！");
             GameOver();
+        }
+
+        if (collision.gameObject.CompareTag("ScoreItem"))
+        {
+            GameManager.stageScore += collision.gameObject.GetComponent<ItemData>().value;
+            Destroy(collision.gameObject);
         }
     }
 
