@@ -24,7 +24,7 @@ public class CannonController : MonoBehaviour
         }
         return ret;
     }
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,28 +36,37 @@ public class CannonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //待機時間加算
-        passedTimes += Time.deltaTime;
-        //Playerとの距離をチェック
-        if (CheckLength(player.transform.position))
+        if (player != null)
         {
-            //待機時間経過
-            if (passedTimes > delayTime)
+            //待機時間加算
+            passedTimes += Time.deltaTime;
+            //Playerとの距離をチェック
+            if (CheckLength(player.transform.position))
             {
-                passedTimes = 0; //時間を0にリセット
-                //砲弾をプレハブから作る
-                Vector2 pos = new Vector2(gateTransform.position.x, gateTransform.position.y);
-                GameObject obj = Instantiate(objPrefab, pos, Quaternion.identity);
+                //待機時間経過
+                if (passedTimes > delayTime)
+                {
+                    passedTimes = 0; //時間を0にリセット
+                                     //砲弾をプレハブから作る
+                    Vector2 pos = new Vector2(gateTransform.position.x, gateTransform.position.y);
+                    GameObject obj = Instantiate(objPrefab, pos, Quaternion.identity);
 
-                //砲弾が向いてる方向に発射する
-                Rigidbody rbody = obj.GetComponent<Rigidbody>();
-                float angleZ = transform.localEulerAngles.z;
-                float x = Mathf.Cos(angleZ * Mathf.Deg2Rad);
-                float y = Mathf.Sin(angleZ * Mathf.Deg2Rad);
-                Vector2 v = new Vector2(x, y) * fireSpeed;
-                rbody.AddForce(v, ForceMode2D.Impulse);
+                    //砲弾が向いてる方向に発射する
+                    Rigidbody2D rbody = obj.GetComponent<Rigidbody2D>();
+                    float angleZ = transform.localEulerAngles.z;
+                    float x = Mathf.Cos(angleZ * Mathf.Deg2Rad);
+                    float y = Mathf.Sin(angleZ * Mathf.Deg2Rad);
+                    Vector2 v = new Vector2(x, y) * fireSpeed;
+                    rbody.AddForce(v, ForceMode2D.Impulse);
+                }
             }
         }
-
     }
+
+    //範囲表示
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, length);
+    }
+
 }

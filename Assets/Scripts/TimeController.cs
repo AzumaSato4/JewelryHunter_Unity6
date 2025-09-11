@@ -71,8 +71,6 @@ public class TimeController : MonoBehaviour
                     GameManager.gameState = "gameover";
                 }
             }
-
-            Debug.Log(displayTime);
         }
     }
 }

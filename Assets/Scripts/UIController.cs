@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour
     TimeController timeCnt; //TimeController.csの参照
     public GameObject timeText; //TimeBarを取得
 
-
+    public GameObject scoreText; //スコアテキスト
 
 
 
@@ -68,4 +68,9 @@ public class UIController : MonoBehaviour
         mainImage.SetActive(false);
     }
 
+    void UpadateScore()
+    {
+        int score = GameManager.stageScore + GameManager.totalScore;
+        scoreText.GetComponent<TextMeshProUGUI>().text = score.ToString();
+    }
 }

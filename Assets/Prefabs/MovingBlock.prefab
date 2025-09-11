@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1762802038191252561}
   - component: {fileID: 4401102025425349565}
   - component: {fileID: 8122555581182932206}
+  - component: {fileID: 6444587769528339755}
   m_Layer: 6
   m_Name: MovingBlock
   m_TagString: Untagged
@@ -134,3 +135,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.2, y: 0.69}
   m_EdgeRadius: 0
+--- !u!114 &6444587769528339755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406136904609773337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df29f828d2228e14ab918234bac3bcb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveX: 10
+  moveY: 3
+  time: 4
+  wait: 2
+  isMoveWhenOn: 0
