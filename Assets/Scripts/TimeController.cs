@@ -68,7 +68,7 @@ public class TimeController : MonoBehaviour
                     //ユーザーに見せたい時間を基準時間にする
                     displayTime = gameTime;
                     isTimeOver = true; //停止フラグをON
-                    GameManager.gameState = "gameover";
+                    //GameManager.gameState = "gameover";
                 }
             }
         }

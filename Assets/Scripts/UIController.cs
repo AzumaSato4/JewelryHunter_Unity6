@@ -18,7 +18,8 @@ public class UIController : MonoBehaviour
 
     public GameObject scoreText; //スコアテキスト
 
-
+    AudioSource audio;
+    SoundController soundController; //自作したスクリプト
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +31,11 @@ public class UIController : MonoBehaviour
         //時間差でメソッドを発動
         Invoke("InactiveImage", 1.0f);
 
+        UpdateScore();
+
+        //AudioSourceとSoundControllerの取得
+        audio = GetComponent<AudioSource>();
+        soundController = GetComponent<SoundController>();
     }
 
     // Update is called once per frame
@@ -43,6 +49,32 @@ public class UIController : MonoBehaviour
             mainImage.GetComponent<Image>().sprite = gameClearSprite;
             //リトライボタンオブジェクトのButtonコンポーネントが所持している変数interactalbeを無効（ボタン機能を無効）
             retryButton.GetComponent<Button>().interactable = false;
+
+            //ステージクリアによってステージスコアが確定したので
+            //トータルスコアに加算
+            GameManager.totalScore += GameManager.stageScore;
+            GameManager.stageScore = 0; //次に備えてステージスコアはリセット
+
+            timeCnt.isTimeOver = true; //タイムカウント停止
+            float times = timeCnt.displayTime;
+            if (timeCnt.isCountDown) //カウントダウン
+            {
+                //残時間をそのままタイムボーナスとしてトータルスコアに加算
+                GameManager.totalScore += (int)times * 10;
+            }
+            else //カウントアップ
+            {
+                float gameTime = timeCnt.gameTime; //基準時間の取得
+                GameManager.totalScore -= (int)(gameTime - times) * 10;
+            }
+
+            UpdateScore(); //UIに最終的な数字を反映
+
+            //サウンドストップ
+            audio.Stop();
+            audio.PlayOneShot(soundController.bgm_GameClear);
+
+            GameManager.gameState = "gameend";
         }
 
         else if (GameManager.gameState == "gameover")
@@ -53,12 +85,39 @@ public class UIController : MonoBehaviour
             mainImage.GetComponent<Image>().sprite = gameOverSprite;
             //ネクストボタンオブジェクトのButtonコンポーネントが所持している変数interactalbeを無効（ボタン機能を無効）
             nextButton.GetComponent<Button>().interactable = false;
+
+            timeCnt.isTimeOver = true;
+
+            //サウンドストップ
+            audio.Stop();
+            audio.PlayOneShot(soundController.bgm_GameOver);
+
+            GameManager.gameState = "gameend";
         }
         else if (GameManager.gameState == "playing")
         {
             //いったんdisplayTimeの数字を変数timesに渡す
             float times = timeCnt.displayTime;
             timeText.GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(times).ToString();
+
+            if (timeCnt.isCountDown)
+            {
+                if (timeCnt.displayTime <= 0)
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().GameOver();
+                    GameManager.gameState = "gameover";
+                }
+            }
+            else
+            {
+                if (timeCnt.displayTime >= timeCnt.gameTime)
+                {
+                    GameManager.gameState = "gameover";
+                }
+            }
+
+                //スコアもリアルタイムに更新
+                UpdateScore();
         }
     }
 
@@ -68,7 +127,7 @@ public class UIController : MonoBehaviour
         mainImage.SetActive(false);
     }
 
-    void UpadateScore()
+    void UpdateScore()
     {
         int score = GameManager.stageScore + GameManager.totalScore;
         scoreText.GetComponent<TextMeshProUGUI>().text = score.ToString();

@@ -21,12 +21,19 @@ public class PlayerController : MonoBehaviour
 
     bool onGround = false; //地面にいるかどうかの判定（地面にいる：ture、地面にいない：false）
 
+    AudioSource audio;
+    public AudioClip se_Jump;
+    public AudioClip se_ItemGet;
+    public AudioClip se_Damage;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>(); //Playerについているコンポーネント情報を取得
         animator = GetComponent<Animator>();
+
+        audio = GetComponent<AudioSource>(); //AudioSourceコンポーネントの情報を代入
     }
 
     // Update is called once per frame
@@ -109,6 +116,9 @@ public class PlayerController : MonoBehaviour
     {
         if (onGround)
         {
+            //SEを鳴らす
+            audio.PlayOneShot(se_Jump);
+
             goJump = true; //ジャンプフラグをON
             animator.SetTrigger("Jump");
         }
@@ -127,6 +137,9 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Dead"))
         {
+            //SEを鳴らす
+            audio.PlayOneShot(se_Damage);
+
             GameManager.gameState = "gameover";
             Debug.Log("ゲームオーバー！");
             GameOver();
@@ -134,6 +147,9 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("ScoreItem"))
         {
+            //SEを鳴らす
+            audio.PlayOneShot(se_ItemGet);
+
             GameManager.stageScore += collision.gameObject.GetComponent<ItemData>().value;
             Destroy(collision.gameObject);
         }
