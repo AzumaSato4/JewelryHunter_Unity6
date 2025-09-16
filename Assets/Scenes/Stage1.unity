@@ -261,6 +261,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Needle
       objectReference: {fileID: 0}
+    - target: {fileID: 2156617949597138791, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2281726082074282824, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2815374668908783386, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8915139937129720481, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.8
@@ -317,6 +329,14 @@ PrefabInstance:
     - target: {fileID: 1801078939611501794, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
       propertyPath: m_Name
       value: Needle (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2156617949597138791, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2281726082074282824, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8915139937129720481, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
       propertyPath: m_LocalScale.x
@@ -391,6 +411,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Needle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2156617949597138791, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2281726082074282824, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8915139937129720481, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -463,6 +491,14 @@ PrefabInstance:
     - target: {fileID: 1801078939611501794, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
       propertyPath: m_Name
       value: Needle (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2156617949597138791, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2281726082074282824, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8915139937129720481, guid: d86286971e0484b4ebbad382ecc20e33, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2666,6 +2702,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2716632670671291569, guid: 5dbf18eec874daf4783e1cbd3b935963, type: 3}
+      propertyPath: gameTime
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716632670671291569, guid: 5dbf18eec874daf4783e1cbd3b935963, type: 3}
+      propertyPath: isTimeOver
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716632670671291569, guid: 5dbf18eec874daf4783e1cbd3b935963, type: 3}
+      propertyPath: isCountDown
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4475752004102677903, guid: 5dbf18eec874daf4783e1cbd3b935963, type: 3}
       propertyPath: sceneName
       value: Stage1
@@ -2689,7 +2737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 26851540034734031, guid: 5a90a1039ad8a254ea7c4f2229bdd74a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.0283494
+      value: 0.86
       objectReference: {fileID: 0}
     - target: {fileID: 26851540034734031, guid: 5a90a1039ad8a254ea7c4f2229bdd74a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3282,6 +3330,14 @@ PrefabInstance:
     - target: {fileID: 7964593179164919221, guid: f12c9c78a469b584ba773a1257265ab3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478204724112650039, guid: f12c9c78a469b584ba773a1257265ab3, type: 3}
+      propertyPath: speed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478204724112650039, guid: f12c9c78a469b584ba773a1257265ab3, type: 3}
+      propertyPath: jumpPower
+      value: 6.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
