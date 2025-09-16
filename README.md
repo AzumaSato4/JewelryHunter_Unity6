@@ -13,6 +13,65 @@
 ## 制作のポイント
 ### アニメーションをトランジションで作成
 
-Playerのアニメ切り替えには各クリップをトランジションでつないでフラグで管理しました。トランジション滑らかに
+Playerのアニメ切り替えには各クリップをトランジションでつないでフラグで管理しました。トランジションを組み込むことで、アニメ切り替えが滑らかになり、かつコーディングが効率的なものになりました。
 
+![トランジションの絵](readmeimg/Jewelryhunter-radmeimg01.jpg)
 
+## Itemのコーディング
+
+Itemは列挙型のItemColorを自作して、ItemColor型の変数次第で何色が選ばれているのかにより見た目が変わるようなコーディングの工夫をしました。
+
+```c#
+using UnityEngine;
+
+public enum ItemColor
+{
+    White,
+    Blue,
+    Green,
+    Red
+}
+
+public class ItemData : MonoBehaviour
+{
+    public ItemColor colors = ItemColor.White;
+    public Sprite[] itemSprites;
+
+    public int value = 0;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+
+        switch (colors)
+        {
+            case ItemColor.White:
+                spriteRenderer.sprite = itemSprites[0];
+                break;
+            case ItemColor.Blue:
+                spriteRenderer.sprite = itemSprites[1];
+                break;
+            case ItemColor.Green:
+                spriteRenderer.sprite = itemSprites[2];
+                break;
+            case ItemColor.Red:
+                spriteRenderer.sprite = itemSprites[3];
+                break;
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+
+```
+
+## TextMeshProのデザイン切り分け
+
+TextMeshProのデザインを細かく切り分けてデータを用意するなど工夫をしました。
+
+![TextMeshProデザインの絵](readmeimg/Jewelryhunter-readmeimg03.jpg)
