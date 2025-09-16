@@ -5,3 +5,7 @@
 * アニメーションの作り方
 * タグやレイヤーの使い方
 など基本を学んでいます。
+
+## プレイURL
+
+https://azumasato4.github.io/JewelryHunter_Web/
