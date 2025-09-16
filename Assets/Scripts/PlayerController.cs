@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class PlayerController : MonoBehaviour
     public AudioClip se_ItemGet;
     public AudioClip se_Damage;
 
+    UIController UICon;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +37,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         audio = GetComponent<AudioSource>(); //AudioSourceコンポーネントの情報を代入
+
+        UICon = GetComponent<UIController>();
     }
 
     // Update is called once per frame
@@ -48,11 +53,19 @@ public class PlayerController : MonoBehaviour
 
         //Velocityの元となる値の取得（右なら1.0f、左なら-1.0f、なにもなければ0）
         axisH = Input.GetAxisRaw("Horizontal");
+        if (Gamepad.current != null)
+        {
+            //バーチャルパッドが表示されていたらaxisHの入力元を変える
+            var stickValue = Gamepad.current.leftStick.ReadValue();
+            axisH = stickValue.x;
+        }
+
 
         if (axisH > 0)
         {
             //右を向く
             transform.localScale = new Vector3(1, 1, 1);
+
         }
         else if (axisH < 0)
         {
@@ -61,7 +74,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //GetButtonDownメソッド→引数に指定したボタンが押されたらtureを返す、押されていなければfalseを返す
-        if (Input.GetButtonDown("Jump"))
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             Jump(); //Jumpメソッドの発動
         }

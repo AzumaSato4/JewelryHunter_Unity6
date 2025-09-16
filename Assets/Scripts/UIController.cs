@@ -4,22 +4,26 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
-    public GameObject mainImage; //アナウンスをする画像
-    public GameObject buttonPanel; //ボタンをグループ化しているパネル
+    public GameObject mainImage;    //アナウンスをする画像
+    public GameObject buttonPanel;  //ボタンをグループ化しているパネル
 
-    public GameObject retryButton; //リトライボタン
-    public GameObject nextButton; //ネクストボタン
+    public GameObject retryButton;  //リトライボタン
+    public GameObject nextButton;   //ネクストボタン
 
-    public Sprite gameClearSprite; //ゲームクリアの絵
-    public Sprite gameOverSprite; //ゲームオーバーの絵
+    public Sprite gameClearSprite;  //ゲームクリアの絵
+    public Sprite gameOverSprite;   //ゲームオーバーの絵
 
-    TimeController timeCnt; //TimeController.csの参照
-    public GameObject timeText; //TimeBarを取得
+    TimeController timeCnt;         //TimeController.csの参照
+    public GameObject timeText;     //TimeBarを取得
 
-    public GameObject scoreText; //スコアテキスト
+    public GameObject scoreText;    //スコアテキスト
 
     AudioSource audio;
     SoundController soundController; //自作したスクリプト
+
+    public GameObject onPadButton;   //バーチャルパッドを表示非表示を切り替えるボタン
+    public GameObject padButton;
+    public bool isPad = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,6 +40,11 @@ public class UIController : MonoBehaviour
         //AudioSourceとSoundControllerの取得
         audio = GetComponent<AudioSource>();
         soundController = GetComponent<SoundController>();
+
+        //padButtonの初期設定
+        onPadButton.SetActive(false);
+        padButton.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -49,6 +58,9 @@ public class UIController : MonoBehaviour
             mainImage.GetComponent<Image>().sprite = gameClearSprite;
             //リトライボタンオブジェクトのButtonコンポーネントが所持している変数interactalbeを無効（ボタン機能を無効）
             retryButton.GetComponent<Button>().interactable = false;
+            onPadButton.SetActive(false);
+            padButton.SetActive(false);
+            isPad = false;
 
             //ステージクリアによってステージスコアが確定したので
             //トータルスコアに加算
@@ -85,6 +97,9 @@ public class UIController : MonoBehaviour
             mainImage.GetComponent<Image>().sprite = gameOverSprite;
             //ネクストボタンオブジェクトのButtonコンポーネントが所持している変数interactalbeを無効（ボタン機能を無効）
             nextButton.GetComponent<Button>().interactable = false;
+            onPadButton.SetActive(false);
+            padButton.SetActive(false);
+            isPad = false;
 
             timeCnt.isTimeOver = true;
 
@@ -116,8 +131,10 @@ public class UIController : MonoBehaviour
                 }
             }
 
-                //スコアもリアルタイムに更新
-                UpdateScore();
+            //スコアもリアルタイムに更新
+            UpdateScore();
+
+            onPadButton.SetActive(true);
         }
     }
 
@@ -131,5 +148,11 @@ public class UIController : MonoBehaviour
     {
         int score = GameManager.stageScore + GameManager.totalScore;
         scoreText.GetComponent<TextMeshProUGUI>().text = score.ToString();
+    }
+
+    public void SetPadButton()
+    {
+        isPad = !isPad;
+        padButton.SetActive(isPad);
     }
 }
