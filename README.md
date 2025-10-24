@@ -75,3 +75,20 @@ public class ItemData : MonoBehaviour
 TextMeshProのデザインを細かく切り分けてデータを用意するなど工夫をしました。
 
 ![TextMeshProデザインの絵](readmeimg/Jewelryhunter-readmeimg03.jpg)
+
+## オリジナルポイント
+
+授業とは別に調べながらバーチャルパッドを実装してみました。
+
+```c#
+//Velocityの元となる値の取得（右なら1.0f、左なら-1.0f、なにもなければ0）
+axisH = Input.GetAxisRaw("Horizontal");
+if (Gamepad.current != null)
+{
+    //バーチャルパッドが表示されていたらaxisHの入力元を変える
+    var stickValue = Gamepad.current.leftStick.ReadValue();
+    axisH = stickValue.x;
+}
+```
+
+![バーチャルパッド表示画像](readmeimg/pad.png)
